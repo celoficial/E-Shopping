@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
+﻿using Discount.Grpc.Protos;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Basket.Api
 {
@@ -26,6 +27,11 @@ namespace Basket.Api
                 .AddRedis(configuration.GetValue<string>("CacheSettings:ConnectionString") ?? "",
                     "Redis Health Check",
                     HealthStatus.Degraded);
+
+            services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(o =>
+            {
+                o.Address = new Uri(configuration.GetValue<string>("GrpcSettings:DiscountUrl") ?? "");
+            });
 
             return services;
         }
