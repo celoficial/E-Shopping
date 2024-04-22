@@ -25,6 +25,11 @@ namespace Basket.Application.Handlers
                 UserName = request.Username
             });
             var shoppingCartResponse = _mapper.Map<ShoppingCartResponse>(shoppingCart);
+            if (shoppingCart is not null)
+            {
+                shoppingCartResponse.TotalPrice = shoppingCart.TotalPrice;
+            }
+            
             return shoppingCartResponse;
         }
     }
