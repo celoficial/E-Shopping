@@ -27,6 +27,15 @@ services:
       POSTGRES_PASSWORD: admin1234
       POSTGRES_DB: DiscountDb
 
+  orderdb:
+    container_name: orderdb
+    restart: always
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "admin123456789"
+      ACCEPT_EULA: "Y"
+
   portainer:
     container_name: portainer
     restart: always
@@ -73,3 +82,15 @@ services:
       - discountdb
     ports:
       - "9002:80"
+
+  ordering.api:
+    container_name: ordering.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings__OrderingConnectionString=Server=orderdb;Database=OrderingDb;User Id=sa;Password=admin123456789;TrustServerCertificate=True;"
+      - "EventBusSettings__HostAddress=ampq://guest:guest@rabbitmq:5672"
+      - "ElasticConfiguration__Uri=http://elasticsearch:9200"
+    depends_on:
+      - orderdb
+    ports:
+      - "9003:80"
