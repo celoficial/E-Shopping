@@ -1,4 +1,5 @@
 ﻿using Discount.Grpc.Protos;
+using MassTransit;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Basket.Api
@@ -8,6 +9,18 @@ namespace Basket.Api
         public static IServiceCollection AddPresentation(this IServiceCollection services, ConfigurationManager configuration)
         {
             services.AddApiVersioning();
+
+            services.AddMassTransit(o =>
+            {
+                o.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.Host(configuration["EventBusSettings:Server"], "/", h =>
+                    {
+                        h.Username(configuration["EventBusSettings:UserName"]);
+                        h.Password(configuration["EventBusSettings:Password"]);
+                    });
+                });
+            });
 
             services.AddStackExchangeRedisCache(o =>
             {

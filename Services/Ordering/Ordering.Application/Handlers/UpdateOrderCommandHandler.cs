@@ -24,14 +24,14 @@ namespace Ordering.Application.Handlers
         public async Task Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
             var orderToUpdate = await _orderRepository.GetByIdAsync(request.Id);
-            if (orderToUpdate is null) 
+            if (orderToUpdate is null)
             {
                 throw new OrderNotFoundException(nameof(Order), request.Id);
             }
             var order = _mapper.Map<Order>(request);
             await _orderRepository.UpdateAsync(order);
             _logger.LogInformation("Order {Order} was updated successfully", orderToUpdate.Id);
-            
+
         }
     }
 }

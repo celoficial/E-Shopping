@@ -5,7 +5,7 @@ namespace Ordering.Application.Exceptions
     {
         public OrderNotFoundException(string name, object key) : base($"Entity {name} - {key} is not found")
         {
-            
+
         }
     }
 }

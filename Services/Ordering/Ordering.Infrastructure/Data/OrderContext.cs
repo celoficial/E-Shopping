@@ -7,9 +7,9 @@ namespace Ordering.Infrastructure.Data
 {
     public class OrderContext : DbContext
     {
-        public OrderContext(DbContextOptions<OrderContext> dbContextOptions):base(dbContextOptions)
+        public OrderContext(DbContextOptions<OrderContext> dbContextOptions) : base(dbContextOptions)
         {
-            
+
         }
 
         public DbSet<Order> Orders { get; set; }

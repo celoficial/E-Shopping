@@ -19,8 +19,8 @@ namespace Ordering.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<OrderResponse>), StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<OrderResponse>>> GetOrdersByUserName(string userName)
         {
-            var query = new GetOrderListQuery 
-            { 
+            var query = new GetOrderListQuery
+            {
                 UserName = userName
             };
             var orders = await _sender.Send(query);

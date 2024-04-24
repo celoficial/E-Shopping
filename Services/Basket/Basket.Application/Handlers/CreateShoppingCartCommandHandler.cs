@@ -29,7 +29,7 @@ namespace Basket.Application.Handlers
             {
                 shoppingCartResponse.TotalPrice = shoppingCart.TotalPrice;
             }
-            
+
             return shoppingCartResponse;
         }
     }

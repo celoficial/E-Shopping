@@ -40,7 +40,7 @@ namespace Ordering.Infrastructure
                 }
                 catch (SqlException e)
                 {
-                    logger.LogError(e, "An error occurred while migrating db: {Name}",typeof(TContext).Name);
+                    logger.LogError(e, "An error occurred while migrating db: {Name}", typeof(TContext).Name);
                 }
             }
 
