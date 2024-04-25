@@ -15,12 +15,6 @@
 
             services.AddGrpc();
 
-            //services.AddHealthChecks()
-            //    .AddMongoDb(configuration.GetValue<string>("DatabaseSettings:ConnectionString") ?? "",
-            //    "Catalog Mongo Db Health Check",
-            //    HealthStatus.Degraded);
-
-
             return services;
         }
     }

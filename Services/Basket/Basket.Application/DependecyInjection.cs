@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Basket.Application.GrpcServices;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace Basket.Application
@@ -14,6 +15,7 @@ namespace Basket.Application
                 cfg.ShouldMapField = f => f.IsPublic || f.IsAssembly;
             });
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+            services.AddScoped<DiscountGrpcService>();
             return services;
         }
     }
